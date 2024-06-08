@@ -56,7 +56,7 @@ devDependencies:
     specifier: ^9.17.0
     version: 9.17.0(eslint@8.50.0)
   husky:
-    specifier: ^8.0.3
+    specifier: ^8.0.0
     version: 8.0.3
   lint-staged:
     specifier: ^15.2.0
