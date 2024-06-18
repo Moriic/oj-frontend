@@ -12,7 +12,6 @@
           text-color="white"
           active-text-color="yellowgreen"
         >
-          dd .
           <!--根据路由动态生成菜单-->
           <Menu :menuList="constantRoute[0].children"></Menu>
         </el-menu>
@@ -60,7 +59,7 @@ console.log(constantRoute[0].children)
     position: fixed;
     width: calc(100% - $base-menu-width);
     height: $base-tabbar-height;
-    top: 0px;
+    top: 0;
     left: $base-menu-width;
     transition: all 0.3s;
 
