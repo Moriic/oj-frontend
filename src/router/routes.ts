@@ -16,6 +16,15 @@ export const constantRoute: Array<RouteRecordRaw> = [
           icon: 'HomeFilled',
         },
       },
+      {
+        path: '/questionBank',
+        component: () => import('@/views/questionBank/QuestionList.vue'),
+        meta: {
+          title: '题库',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
     ],
   },
 ]
