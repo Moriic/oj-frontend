@@ -19,6 +19,9 @@ export default defineConfig({
     visualizer({ open: true }),
     AutoImport({
       resolvers: [ElementPlusResolver()],
+      eslintrc: {
+        enabled: true,
+      },
     }),
     Components({
       resolvers: [ElementPlusResolver()],

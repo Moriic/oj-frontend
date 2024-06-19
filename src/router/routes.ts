@@ -34,6 +34,24 @@ export const constantRoute: Array<RouteRecordRaw> = [
           icon: 'HomeFilled',
         },
       },
+      {
+        path: '/exam',
+        component: () => import('@/views/examination/ExamList.vue'),
+        meta: {
+          title: '试卷',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: '/doExam',
+        component: () => import('@/views/examination/DoExam.vue'),
+        meta: {
+          title: '做题',
+          hidden: true,
+          icon: 'HomeFilled',
+        },
+      },
     ],
   },
   {

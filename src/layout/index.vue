@@ -29,8 +29,6 @@ import { constantRoute } from '@/router/routes'
 import { useRoute } from 'vue-router'
 import Menu from '@/layout/Menu.vue'
 const $route = useRoute()
-
-console.log(constantRoute[0].children)
 </script>
 
 <style scoped lang="scss">

@@ -1,7 +1,12 @@
 <template>
   <div class="form">
     <el-form :model="questionForm" label-width="80px" label-position="left">
-      <el-form-item label="题目类型">
+      <el-form-item
+        label="题目类型"
+        :rules="[
+          { required: true, message: '请选择题目类型', trigger: 'blur' },
+        ]"
+      >
         <el-select v-model="questionForm.type" placeholder="Select">
           <el-option label="单选题" :value="0"></el-option>
           <el-option label="多选题" :value="1"></el-option>
@@ -9,20 +14,32 @@
           <el-option label="简答题" :value="3"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="问题">
+      <el-form-item
+        label="问题"
+        prop="question"
+        :rules="[
+          {
+            required: true,
+            message: '请输入问题',
+            trigger: 'blur',
+          },
+        ]"
+      >
         <el-input v-model="questionForm.question"></el-input>
       </el-form-item>
       <template v-if="questionForm.type === 0 || questionForm.type === 1">
-        <el-form-item label="选项">
+        <el-form-item label="选项" required>
           <div v-for="(option, index) in questionForm.options" :key="index">
             <div style="display: flex; align-items: center">
-              <span style="margin-right: 10px">
-                {{ String.fromCharCode(65 + index) }}
-              </span>
               <el-input
                 v-model="questionForm.options[index]"
                 style="width: 500px; margin: 5px 0"
-              ></el-input>
+                autosize
+              >
+                <template #prepend>
+                  {{ String.fromCharCode(65 + index) }}
+                </template>
+              </el-input>
               <el-button
                 type="danger"
                 @click="removeOption(index)"
@@ -39,13 +56,14 @@
           </div>
         </el-form-item>
       </template>
-      <el-form-item label="答案">
+      <el-form-item label="答案" required>
         <template v-if="questionForm.type === 0">
           <el-radio-group v-model="questionForm.answer[0]">
             <el-radio
               v-for="(option, index) in questionForm.options"
               :label="questionForm.options[index]"
               :key="index"
+              border
             >
               {{ String.fromCharCode(65 + index) }}
             </el-radio>
@@ -72,6 +90,9 @@
           <el-input v-model="questionForm.answer[0]"></el-input>
         </template>
       </el-form-item>
+      <el-form-item label="分值" required>
+        <el-input-number v-model="questionForm.score"></el-input-number>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -87,7 +108,6 @@ const addOption = () => {
 }
 
 const removeOption = (index: number) => {
-  console.log(questionForm.value.options)
   questionForm.value.options.splice(index, 1)
 }
 </script>
@@ -98,9 +118,11 @@ const removeOption = (index: number) => {
   margin: 0 auto;
   font-family: Consolas;
 }
+
 .el-form-item {
   margin-bottom: 15px;
 }
+
 .margin10 {
   margin: 5px 10px;
 }
