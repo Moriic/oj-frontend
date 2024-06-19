@@ -4,7 +4,7 @@ import { RouteRecordRaw } from 'vue-router'
 export const constantRoute: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/home',
+    redirect: '/exercise',
     component: () => import('@/layout/index.vue'),
     children: [
       {
@@ -12,6 +12,15 @@ export const constantRoute: Array<RouteRecordRaw> = [
         component: () => import('@/views/home/index.vue'),
         meta: {
           title: '首页',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: '/exercise',
+        component: () => import('@/views/exercise/index.vue'),
+        meta: {
+          title: '实验发布',
           hidden: false,
           icon: 'HomeFilled',
         },
@@ -26,6 +35,10 @@ export const constantRoute: Array<RouteRecordRaw> = [
         },
       },
     ],
+  },
+  {
+    path: '/Editor',
+    component: () => import('@/views/exercise/Editor.vue'),
   },
 ]
 
