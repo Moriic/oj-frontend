@@ -26,6 +26,15 @@ export const constantRoute: Array<RouteRecordRaw> = [
         },
       },
       {
+        path: '/submit',
+        component: () => import('@/views/submit/index.vue'),
+        meta: {
+          title: '实验提交',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
         path: '/questionBank',
         component: () => import('@/views/questionBank/QuestionList.vue'),
         meta: {
@@ -52,12 +61,42 @@ export const constantRoute: Array<RouteRecordRaw> = [
           icon: 'HomeFilled',
         },
       },
+      {
+        path: '/studentSubmit',
+        component: () => import('@/views/studentSubmit/index.vue'),
+        meta: {
+          title: '学生提交',
+          hidden: false,
+          icon: 'HomeFilled',
+        },
+      },
+      {
+        path: '/studentExercise',
+        component: () => import('@/views/studentSubmit/exercise.vue'),
+        meta: {
+          title: '学生提交情况',
+          hidden: true,
+          icon: 'HomeFilled',
+        },
+      },
     ],
   },
   {
     path: '/Editor',
     component: () => import('@/views/exercise/Editor.vue'),
   },
+  {
+    path: '/submitting',
+    component: () => import('@/views/submit/Submitting.vue'),
+  },
+  {
+    path: '/check',
+    component: () => import('@/views/submit/Check.vue'),
+  },
+  {
+    path: '/checkStudent',
+    component: () => import('@/views/studentSubmit/Check.vue'),
+  }
 ]
 
 //异步路由
