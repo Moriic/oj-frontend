@@ -1,7 +1,7 @@
 <template>
   <div class="exam">
-    <div>
-      <el-card style="width: 1300px">
+    <div class="card">
+      <el-card style="width: 90%">
         <template #header>
           <div style="position: relative">
             <div style="text-align: center; font-size: 20px">
@@ -299,7 +299,6 @@ onBeforeUnmount(async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
 }
 .time {
   position: absolute;
@@ -324,5 +323,11 @@ p {
 .titleClass {
   font-size: 20px;
   color: firebrick;
+}
+.card {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 </style>
