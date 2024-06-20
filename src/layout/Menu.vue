@@ -7,10 +7,8 @@
         v-if="!item.meta.hidden"
         @click="goRoute"
       >
-        <!--        <el-icon>-->
-        <!--          <component :is="item.meta.icon"></component>-->
-        <!--        </el-icon>-->
         <template #title>
+          <svg-icon :name="item.meta.icon" size="19px" />
           <span>{{ item.meta.title }}</span>
         </template>
       </el-menu-item>
@@ -39,7 +37,7 @@
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
-        <span>{{ item.meta.title }}</span>
+        <div>{{ item.meta.title }}</div>
       </template>
       <Menu :menuList="item.children"></Menu>
     </el-sub-menu>
@@ -60,4 +58,18 @@ const goRoute = (vc: any) => {
 </script>
 <script lang="ts"></script>
 
-<style scoped></style>
+<style scoped>
+.is-active {
+  background-color: #eff0ff;
+}
+.el-menu-item {
+  border-radius: 8px;
+  height: 50px;
+  margin: 10px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 1px;
+}
+</style>

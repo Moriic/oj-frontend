@@ -4,13 +4,15 @@
     <div class="layout_slider">
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
+        <div class="logo">
+          <svg-icon name="logo" size="38px" color="#eff0ff" class="logoIcon" />
+          <h1 class="logoTitle">Web课程教学辅助系统</h1>
+        </div>
         <!-- 菜单组件-->
         <el-menu
           :collapse="false"
           :default-active="$route.path"
-          background-color="#001529"
-          text-color="white"
-          active-text-color="yellowgreen"
+          active-text-color="#646CFF"
         >
           <!--根据路由动态生成菜单-->
           <Menu :menuList="constantRoute[0].children"></Menu>
@@ -37,12 +39,15 @@ const $route = useRoute()
   height: 100vh;
 
   .layout_slider {
-    color: white;
     width: $base-menu-width;
     height: 100vh;
     background: $base-menu-background;
     transition: all 0.3s;
-
+    box-shadow:
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+      rgba(29, 35, 41, 0.05) 2px 0px 8px 0px;
+    padding: 0 10px;
     .scrollbar {
       width: 100%;
       height: calc(100vh - $base-menu-logo-height);
@@ -82,5 +87,18 @@ const $route = useRoute()
       left: $base-menu-min-width;
     }
   }
+}
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #646cff;
+  margin: 20px 0 20px 0;
+}
+
+.logoTitle {
+  font-size: 18px;
+  font-family: Consolas;
+  margin-left: 10px;
 }
 </style>

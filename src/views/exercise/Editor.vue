@@ -71,7 +71,7 @@ export default {
     const editorConfig = {
       MENU_CONF: {
         uploadImage: {
-          server: 'http://localhost:8080/exercise/uploadImage',
+          server: 'http://localhost:8100/exercise/uploadImage',
           fieldName: 'file',
           customInsert(res, insertFn) {
             const url = res.data
@@ -162,14 +162,16 @@ export default {
 
 <style scoped>
 .inputbox {
-  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-bottom: 20px;
-  margin-left: 520px;
+  font-size: 17px;
 }
 
 .editor-wrapper {
-  width: 80%;
-  height: 545px;
+  width: 90%;
+  height: 720px;
   margin: 0 auto;
   box-sizing: border-box;
 }
