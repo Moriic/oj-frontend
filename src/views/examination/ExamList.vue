@@ -131,7 +131,7 @@ onActivated(() => {
 
 <style scoped>
 .exam-list {
-  padding: 20px;
+  padding: 10px 20px;
   font-family: Consolas;
 }
 
