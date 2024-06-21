@@ -1,7 +1,7 @@
 <template>
   <div class="exam-list">
-    <el-tabs type="border-card" stretch>
-      <el-tab-pane label="待完成试卷" stretch>
+    <el-tabs type="border-card" stretch v-model="activeName">
+      <el-tab-pane label="待完成试卷" name="first" stretch>
         <div style="min-height: 700px">
           <el-row :gutter="20">
             <el-col :span="8" v-for="exam in examList" :key="exam.id">
@@ -30,6 +30,24 @@
                     <el-button type="primary" @click="doExam(exam.id)">
                       开始答题
                     </el-button>
+                    <el-button
+                      type="success"
+                      v-if="exam.type === 0"
+                      @click="updateExam(exam.id)"
+                    >
+                      修改试题
+                    </el-button>
+                    <el-popconfirm
+                      title="确认删除?"
+                      confirm-button-text="确认"
+                      cancel-button-text="取消"
+                      @confirm="deleteExam(exam.id)"
+                      v-if="exam.type === 0"
+                    >
+                      <template #reference>
+                        <el-button type="danger">删除试题</el-button>
+                      </template>
+                    </el-popconfirm>
                   </div>
                 </template>
               </el-card>
@@ -37,7 +55,7 @@
           </el-row>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="已完成试卷">
+      <el-tab-pane label="已完成试卷" name="second">
         <div style="min-height: 700px">
           <el-row :gutter="20">
             <el-col :span="8" v-for="exam in finishList" :key="exam.id">
@@ -71,13 +89,16 @@
                     </el-tag>
                   </div>
                 </div>
-                <!--              <template #footer>-->
-                <!--                <div style="display: flex; justify-content: center">-->
-                <!--                  <el-button type="primary" @click="doExam(exam.id)">-->
-                <!--                    查看详情-->
-                <!--                  </el-button>-->
-                <!--                </div>-->
-                <!--              </template>-->
+                <template #footer>
+                  <div style="display: flex; justify-content: center">
+                    <el-button
+                      type="primary"
+                      @click="showDetail(exam.examinationId, exam.id)"
+                    >
+                      查看详情
+                    </el-button>
+                  </div>
+                </template>
               </el-card>
             </el-col>
           </el-row>
@@ -90,11 +111,15 @@
 <script setup>
 import { ref, onMounted, onActivated } from 'vue'
 import http from '@/utils/http'
-import { useRouter } from 'vue-router'
-
+import { useRoute, useRouter } from 'vue-router'
+const showDetail = (examId, finishId) => {
+  router.push({ path: '/showQuestion', query: { examId, finishId } })
+}
 const examList = ref([])
 const finishList = ref([])
 const router = useRouter()
+const activeName = ref('first')
+const route = useRoute()
 
 const doExam = (examId) => {
   router.push({ path: '/doExam', query: { exam: examId } })
@@ -121,12 +146,26 @@ const getFinishList = async () => {
 onMounted(() => {
   getExamList()
   getFinishList()
+  const tabParam = route.query?.tab
+  if (tabParam) {
+    activeName.value = tabParam
+  }
 })
 
 onActivated(() => {
   getExamList()
   getFinishList()
 })
+
+const updateExam = (id) => {
+  router.push({ path: '/updateExam', query: { exam: id, path: '/exam' } })
+}
+
+const deleteExam = async (id) => {
+  await http.delete(`/examination/${id}`)
+  await getExamList()
+  ElMessage.success('删除成功')
+}
 </script>
 
 <style scoped>
@@ -138,9 +177,11 @@ onActivated(() => {
 .el-card {
   margin-bottom: 20px;
 }
+
 p {
   margin: 10px 0;
 }
+
 :deep(.el-tabs__item) {
   font-size: 17px !important;
 }

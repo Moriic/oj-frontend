@@ -144,6 +144,7 @@ const examForm = reactive({
   numberOfQuestions: 0,
   isTime: false,
   timeLimit: 120,
+  type: 1,
 })
 
 const submitExam = async () => {
@@ -259,6 +260,7 @@ const filterType = (value, row) => {
 
 onMounted(() => {
   getQuestionList()
+  // TODO  根据role修改type
 })
 
 // 搜索关键词

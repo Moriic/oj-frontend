@@ -5,7 +5,7 @@
       <el-menu-item
         :index="item.path"
         v-if="!item.meta.hidden"
-        @click="goRoute"
+        @click="goRoute(item.path)"
       >
         <template #title>
           <svg-icon :name="item.meta.icon" size="19px" />
@@ -51,9 +51,9 @@ defineProps(['menuList'])
 //获取路由器对象
 let $router = useRouter()
 //点击菜单的回调
-const goRoute = (vc: any) => {
+const goRoute = (path: any) => {
   //路由跳转
-  $router.push(vc.index)
+  $router.push(path)
 }
 </script>
 <script lang="ts"></script>

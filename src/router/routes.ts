@@ -31,7 +31,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
         meta: {
           title: '实验提交',
           hidden: false,
-          icon: 'exerciseIcon',
+          icon: 'exerciseSubIcon',
         },
       },
       {
@@ -63,8 +63,26 @@ export const constantRoute: Array<RouteRecordRaw> = [
         path: '/exam',
         component: () => import('@/views/examination/ExamList.vue'),
         meta: {
-          title: '查看试卷',
+          title: '查看试卷,学生',
           hidden: false,
+          icon: 'examIcon',
+        },
+      },
+      {
+        path: '/exam/teacher',
+        component: () => import('@/views/examination/ExamListTeacher.vue'),
+        meta: {
+          title: '查看试卷,老师',
+          hidden: false,
+          icon: 'examIcon',
+        },
+      },
+      {
+        path: '/updateExam',
+        component: () => import('@/views/examination/UpdateExamination.vue'),
+        meta: {
+          title: '修改试题',
+          hidden: true,
           icon: 'examIcon',
         },
       },
@@ -78,12 +96,21 @@ export const constantRoute: Array<RouteRecordRaw> = [
         },
       },
       {
+        path: '/showQuestion',
+        component: () => import('@/views/examination/ShowQuestion.vue'),
+        meta: {
+          title: '修改试题',
+          hidden: true,
+          icon: 'examIcon',
+        },
+      },
+      {
         path: '/studentSubmit',
         component: () => import('@/views/studentSubmit/index.vue'),
         meta: {
           title: '学生提交',
           hidden: false,
-          icon: 'HomeFilled',
+          icon: 'submitIcon',
         },
       },
       {
