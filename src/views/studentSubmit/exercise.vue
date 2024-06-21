@@ -1,4 +1,6 @@
 <template>
+  <div class="exercise-title">{{ stuName }}的实验提交情况</div>  
+  <hr>
   <el-container class="common-layout">
     <el-main>
       <el-row :gutter="20">
@@ -61,6 +63,9 @@
       </el-row>
     </el-main>
   </el-container>
+  <div class="button-container">
+      <button class="cancel-button" @click="handleCancel">返回</button>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -85,6 +90,7 @@ const router = useRouter()
 const tableDataNoSubmitted = ref([])
 const tableDataSubmitted = ref([])
 let stuid = 0
+const stuName = ref('')
 
 const handleClick = async (action: string, row: any) => {
   if (action === 'check') {
@@ -127,6 +133,13 @@ const filteredDataSubmitted = computed(() => {
   )
 })
 
+// 返回按钮点击处理
+const handleCancel = () => {
+      router.push({
+          path: '/studentSubmit',
+        })
+    }
+
 const fetchData = async () => {
   try {
     const noSubmittedResponse = await http.get(
@@ -151,13 +164,19 @@ const fetchData = async () => {
 
 onMounted(() => {
   if (router.currentRoute.value.query.id) {
-    stuid = router.currentRoute.value.query.id
+    stuid = router.currentRoute.value.query.id,
+    stuName.value = router.currentRoute.value.query.name
   }
   fetchData()
 })
 </script>
 
 <style scoped>
+.exercise-title{
+  margin: 10px;
+  font-size: x-large;
+  font-weight: bold;
+}
 .el-header {
   background-color: #b3c0d1;
   color: white;
@@ -189,5 +208,21 @@ onMounted(() => {
   font-size: 20px;
   font-weight: 600;
   padding: 10px;
+}
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+.cancel-button {
+  padding: 7px 22px;
+  font-size: 12px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f56c6c;
 }
 </style>

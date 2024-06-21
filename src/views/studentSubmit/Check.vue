@@ -73,18 +73,7 @@ export default {
     })
 
     // Editor 相关配置
-    const editorConfig = {
-      MENU_CONF: {
-        uploadImage: {
-          server: 'http://localhost:8080/exercise/uploadImage',
-          fieldName: 'file',
-          customInsert(res, insertFn) {
-            const url = res.data
-            insertFn(url)
-          },
-        },
-      },
-    }
+    const editorConfig = {}
     editorConfig.readOnly = true
 
 
@@ -103,9 +92,7 @@ export default {
 
     // 返回按钮点击处理
     const handleCancel = () => {
-      router.push({
-          path: '/studentSubmit',
-        })
+      router.go(-1);
     }
 
     return {

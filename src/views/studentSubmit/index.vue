@@ -109,6 +109,7 @@ const handleClick = async (action: string, row: any) => {
       path: '/studentExercise',
       query: {
         id: row.id,
+        name:row.name,
       },
     })
   }
@@ -150,6 +151,11 @@ onMounted(async () => {
 </script>
 
 <style scoped>
+.exercise-title{
+  font-size: x-large;
+  font-weight: bold;
+  padding: 10px;
+}
 /* 菜单标题字体大小 */
 .el-sub-menu span {
   font-size: 13px; /* 调整菜单标题的字体大小 */
