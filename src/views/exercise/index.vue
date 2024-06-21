@@ -1,24 +1,27 @@
 <template>
   <el-container class="common-layout">
     <el-main>
-      <el-row :gutter="20" class="control-row">
-        <el-col :span="6">
-          <el-input
-            v-model="searchText"
-            placeholder="请输入搜索内容"
-            class="search-input"
-            clearable
-            @clear="handleSearchClear"
-            @keydown.enter="handleSearch"
-          ></el-input>
-        </el-col>
-        <el-col :span="18" class="text-right">
-          <el-button type="primary" size="default" @click="handleAdd">
-            新增实验
-          </el-button>
-        </el-col>
-      </el-row>
-      <el-table :data="filteredData" max-height="500">
+      <div style="display: flex; justify-content: end; margin-bottom: 20px">
+        <el-input
+          v-model="searchText"
+          placeholder="请输入搜索内容"
+          class="search-input"
+          clearable
+          @clear="handleSearchClear"
+          @keydown.enter="handleSearch"
+          style="width: 200px; margin-right: 20px"
+        ></el-input>
+        <el-button type="primary" size="default" @click="handleAdd">
+          新增实验
+        </el-button>
+      </div>
+      <el-table
+        class="table"
+        stripe
+        border
+        :data="filteredData"
+        max-height="500"
+      >
         <el-table-column fixed prop="id" label="ID" width="150" />
         <el-table-column prop="name" label="实验名称" width="280" />
         <el-table-column prop="timestamp" label="发布时间" width="370" />
@@ -182,64 +185,18 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* 公共布局样式 */
-
-/* 头部样式 */
-.el-header {
-  background-color: #b3c0d1;
-  color: white;
-  line-height: 60px;
-  text-align: center;
-  font-size: 1.5rem; /* 调整头部字体大小 */
-}
-
-/* 菜单标题字体大小 */
-.el-sub-menu span {
-  font-size: 13px; /* 调整菜单标题的字体大小 */
-}
-
-/* 菜单项字体大小 */
-.el-menu-item {
-  font-size: 12px; /* 调整菜单项的字体大小 */
-  border: 1px solid #ebebeb; /* 添加边框样式 */
-}
-
-/* 侧边栏样式 */
-.el-aside {
-  background-color: #d3dce6;
-  width: 200px; /* 固定宽度 */
-}
-
-/* 主要内容样式 */
-.el-main {
-  background-color: #e9eef3;
-  color: black;
-  padding: 20px;
-  text-align: center;
-  min-height: 600px;
-}
-
 /* 控制行样式 */
 .control-row {
   margin-bottom: 15px;
 }
 
-/* 表格内容字体大小 */
-.el-table,
-.el-table th,
-.el-table td {
-  font-size: 11px; /* 调整表格内容的字体大小 */
-}
-
-/* 按钮字体大小 */
-.el-button {
-  font-size: 10px; /* 调整按钮的字体大小 */
+.table {
+  font-family: Consolas;
 }
 
 /* 搜索输入样式 */
 .search-input {
   width: 100%;
-  font-size: 10px; /* 调整搜索输入框字体大小 */
 }
 
 .text-right {

@@ -13,7 +13,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
         meta: {
           title: '首页',
           hidden: false,
-          icon: 'HomeFilled',
+          icon: 'homeIcon',
         },
       },
       {
@@ -22,7 +22,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
         meta: {
           title: '实验发布',
           hidden: false,
-          icon: 'HomeFilled',
+          icon: 'exerciseIcon',
         },
       },
       {
@@ -31,25 +31,25 @@ export const constantRoute: Array<RouteRecordRaw> = [
         meta: {
           title: '实验提交',
           hidden: false,
-          icon: 'HomeFilled',
+          icon: 'exerciseIcon',
         },
       },
       {
         path: '/questionBank',
         component: () => import('@/views/questionBank/QuestionList.vue'),
         meta: {
-          title: '题库',
+          title: '自测题库',
           hidden: false,
-          icon: 'HomeFilled',
+          icon: 'questionIcon',
         },
       },
       {
         path: '/exam',
         component: () => import('@/views/examination/ExamList.vue'),
         meta: {
-          title: '试卷',
+          title: '查看试卷',
           hidden: false,
-          icon: 'HomeFilled',
+          icon: 'examIcon',
         },
       },
       {
