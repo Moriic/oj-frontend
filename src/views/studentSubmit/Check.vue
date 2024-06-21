@@ -1,9 +1,7 @@
 <template>
-  <div class="inputbox">
-    <h1>实验名称：{{ input }}</h1>  
-
-    <h1>实验内容：</h1>  
-  </div>
+  <div class="exercise-title">{{ input }}</div>  
+  <hr>
+  <div class="subtitle">实验内容</div>
   <!-- 问题内容区 -->
   <div class="text-wrapper">
     <Editor
@@ -15,9 +13,7 @@
   </div>
 
   <!-- 回答问题区 -->
-  <div class="inputbox">
-    <h1>学生回答：</h1>  
-  </div>
+  <div class="subtitle">学生作答</div>
   <div class="editor-wrapper">
     <div class="editor-container">
       <Editor
@@ -127,19 +123,26 @@ export default {
 </script>
 
 <style scoped>
+.exercise-title{
+  font-size: x-large;
+  font-weight: bold;
+  padding: 10px;
+}
+.subtitle {
+  padding: 10px;
+  font-size: larger;
+  color: #999ded;
+}
 .inputbox {
   margin: 20px;
   margin-left: 300px;
 }
 .text-wrapper {
   width: 60%;
-  margin: 0 auto;
   box-sizing: border-box;
 }
 .editor-wrapper {
-  height: 500px;
-  width: 80%;
-  margin: 0 auto;
+  width: 90%;
   box-sizing: border-box;
 }
 
