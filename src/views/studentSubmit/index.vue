@@ -18,7 +18,13 @@
           </el-button>
         </el-col> -->
       </el-row>
-      <el-table :data="filteredData" max-height="500">
+      <el-table
+        :data="filteredData"
+        max-height="500"
+        stripe
+        border
+        class="table"
+      >
         <el-table-column prop="account" label="学号" width="280" />
         <el-table-column prop="name" label="姓名" width="370" />
         <el-table-column fixed="right" label="操作">
@@ -46,16 +52,16 @@ import { ElMessageBox } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
 // Helper function to format timestamp
-function formatTimestamp(timestamp: number[]): string {
-  const [year, month, day, hour, minute, second] = timestamp
-  return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(
-    2,
-    '0',
-  )} ${String(hour).padStart(2, '0')}:${String(minute).padStart(
-    2,
-    '0',
-  )}:${String(second).padStart(2, '0')}`
-}
+// function formatTimestamp(timestamp: number[]): string {
+//   const [year, month, day, hour, minute, second] = timestamp
+//   return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(
+//     2,
+//     '0',
+//   )} ${String(hour).padStart(2, '0')}:${String(minute).padStart(
+//     2,
+//     '0',
+//   )}:${String(second).padStart(2, '0')}`
+// }
 
 const searchText = ref('')
 const router = useRouter()
@@ -102,16 +108,16 @@ const handleClick = async (action: string, row: any) => {
     router.push({
       path: '/studentExercise',
       query: {
-        id: row.id
+        id: row.id,
       },
     })
   }
 }
 
-const handleAdd = () => {
-  // 实现添加新实验的逻辑
-  router.push('/Editor')
-}
+// const handleAdd = () => {
+//   // 实现添加新实验的逻辑
+//   router.push('/Editor')
+// }
 
 const handleSearch = () => {
   // 实现搜索逻辑
@@ -144,41 +150,9 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-/* 公共布局样式 */
-
-/* 头部样式 */
-.el-header {
-  background-color: #b3c0d1;
-  color: white;
-  line-height: 60px;
-  text-align: center;
-  font-size: 1.5rem; /* 调整头部字体大小 */
-}
-
 /* 菜单标题字体大小 */
 .el-sub-menu span {
   font-size: 13px; /* 调整菜单标题的字体大小 */
-}
-
-/* 菜单项字体大小 */
-.el-menu-item {
-  font-size: 12px; /* 调整菜单项的字体大小 */
-  border: 1px solid #ebebeb; /* 添加边框样式 */
-}
-
-/* 侧边栏样式 */
-.el-aside {
-  background-color: #d3dce6;
-  width: 200px; /* 固定宽度 */
-}
-
-/* 主要内容样式 */
-.el-main {
-  background-color: #e9eef3;
-  color: black;
-  padding: 20px;
-  text-align: center;
-  min-height: 600px;
 }
 
 /* 控制行样式 */
@@ -186,25 +160,15 @@ onMounted(async () => {
   margin-bottom: 15px;
 }
 
-/* 表格内容字体大小 */
-.el-table,
-.el-table th,
-.el-table td {
-  font-size: 11px; /* 调整表格内容的字体大小 */
-}
-
-/* 按钮字体大小 */
-.el-button {
-  font-size: 10px; /* 调整按钮的字体大小 */
-}
-
 /* 搜索输入样式 */
 .search-input {
   width: 100%;
-  font-size: 10px; /* 调整搜索输入框字体大小 */
 }
 
 .text-right {
   text-align: right;
+}
+.table {
+  font-family: Consolas;
 }
 </style>

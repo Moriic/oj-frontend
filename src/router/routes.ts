@@ -39,7 +39,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
         component: () => import('@/views/submit/Submitting.vue'),
         meta: {
           title: '提交实验',
-          hidden: true
+          hidden: true,
         },
       },
       {
@@ -47,7 +47,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
         component: () => import('@/views/submit/Check.vue'),
         meta: {
           title: '查看已提交实验',
-          hidden: true
+          hidden: true,
         },
       },
       {
@@ -100,16 +100,19 @@ export const constantRoute: Array<RouteRecordRaw> = [
         component: () => import('@/views/studentSubmit/Check.vue'),
         meta: {
           title: '查看学生提交记录',
-          hidden: true
+          hidden: true,
         },
-      }
+      },
+      {
+        path: '/Editor',
+        component: () => import('@/views/exercise/Editor.vue'),
+        meta: {
+          title: '查看学生提交记录',
+          hidden: true,
+        },
+      },
     ],
   },
-  {
-    path: '/Editor',
-    component: () => import('@/views/exercise/Editor.vue'),
-  }
-  
 ]
 
 //异步路由

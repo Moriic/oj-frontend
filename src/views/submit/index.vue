@@ -14,7 +14,13 @@
 
       <el-tabs v-model="activeTab" @tab-change="fetchData">
         <el-tab-pane label="待提交实验列表" name="noSubmitted">
-          <el-table :data="filteredDataNoSubmitted" max-height="500">
+          <el-table
+            :data="filteredDataNoSubmitted"
+            max-height="500"
+            stripe
+            border
+            class="table"
+          >
             <el-table-column fixed prop="id" label="ID" width="150" />
             <el-table-column prop="name" label="实验名称" width="280" />
             <el-table-column prop="timestamp" label="发布时间" width="370" />
@@ -33,7 +39,13 @@
         </el-tab-pane>
 
         <el-tab-pane label="已提交实验列表" name="submitted">
-          <el-table :data="filteredDataSubmitted" max-height="500">
+          <el-table
+            :data="filteredDataSubmitted"
+            max-height="500"
+            class="table"
+            border
+            stripe
+          >
             <el-table-column fixed prop="id" label="ID" width="150" />
             <el-table-column prop="name" label="实验名称" width="280" />
             <el-table-column prop="timestamp" label="发布时间" width="370" />
@@ -73,8 +85,8 @@ function formatTimestamp(timestamp: number[]): string {
 
 const searchText = ref('')
 const router = useRouter()
-const tableDataNoSubmitted = ref([]) 
-const tableDataSubmitted = ref([]) 
+const tableDataNoSubmitted = ref([])
+const tableDataSubmitted = ref([])
 const activeTab = ref('noSubmitted')
 
 const handleClick = async (action: string, row: any) => {
@@ -85,7 +97,7 @@ const handleClick = async (action: string, row: any) => {
         id: row.id,
         name: row.name,
         content: row.content,
-      }
+      },
     })
   }
   if (action === 'submit') {
@@ -126,7 +138,7 @@ const filteredDataSubmitted = computed(() => {
 
 const fetchData = async () => {
   try {
-    if (activeTab.value === 'noSubmitted') {      
+    if (activeTab.value === 'noSubmitted') {
       const response = await http.get('/exercise/list_no_submitted')
       tableDataNoSubmitted.value = response.map((item: any) => ({
         ...item,
@@ -145,7 +157,7 @@ const fetchData = async () => {
 }
 
 onMounted(() => {
-  if(router.currentRoute.value.query.activeTab){
+  if (router.currentRoute.value.query.activeTab) {
     activeTab.value = router.currentRoute.value.query.activeTab
   }
   fetchData()
@@ -154,7 +166,6 @@ onMounted(() => {
 
 <style scoped>
 .el-header {
-  background-color: #b3c0d1;
   color: white;
   line-height: 60px;
   text-align: center;
@@ -170,36 +181,22 @@ onMounted(() => {
   border: 1px solid #ebebeb;
 }
 
-.el-aside {
-  background-color: #d3dce6;
-  width: 200px;
-}
-
 .el-main {
-  background-color: #e9eef3;
   color: black;
   padding: 20px;
   text-align: center;
   min-height: 600px;
 }
 
+.table {
+  font-family: Consolas;
+}
 .control-row {
   margin-bottom: 15px;
 }
 
-.el-table,
-.el-table th,
-.el-table td {
-  font-size: 11px;
-}
-
-.el-button {
-  font-size: 10px;
-}
-
 .search-input {
   width: 100%;
-  font-size: 10px;
 }
 
 .text-right {

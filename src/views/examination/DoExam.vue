@@ -258,12 +258,13 @@ const startTimer = () => {
     }
   }, 1000)
 }
-
+let isSubmit = false
 onBeforeMount(async () => {
   try {
     const response = await http.get(`/examination/${examId}`)
     exam.value = response
     timeLimit.value = exam.value.timeLimit
+    isSubmit = true
   } catch (error) {
     console.error('获取试卷数据失败:', error)
   }
@@ -281,6 +282,7 @@ onBeforeMount(async () => {
   )
 })
 onBeforeUnmount(async () => {
+  if (isSubmit) return
   clearInterval(timer)
   await http.post('/exam_finish', {
     examinationId: examId,
