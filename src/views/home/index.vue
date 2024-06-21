@@ -1,7 +1,15 @@
+<!-- src/views/Home.vue -->
 <template>
-  <div></div>
+  <div>
+    <h1>Home Page</h1>
+    <p>Welcome to the home page!</p>
+  </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup></script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+h1 {
+  color: #007bff;
+}
+</style>
