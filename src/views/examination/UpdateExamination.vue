@@ -40,7 +40,7 @@
       style="width: 100%"
       stripe
       border
-      max-height="560"
+      max-height="480"
       class="table"
     >
       <el-table-column type="selection" width="55" />

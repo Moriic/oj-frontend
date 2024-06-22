@@ -91,7 +91,7 @@ export default {
           //登录成功
           if (response.status == 200) {
             if (data.blocked == 1) {
-              alert('账号已被冻结')
+              ElMessage.error('账号已被冻结')
               return
             }
             console.log(response.data)
@@ -100,16 +100,15 @@ export default {
             //存储角色身份
             localStorage.setItem('role', data.role)
             //跳转到首页
-            alert('登录成功')
+            ElMessage.success('登录成功')
             this.$router.push('/home')
           } else {
             // 登录失败，显示错误信息
-            alert('登录失败,账号或密码错误')
+            ElMessage.error('登录失败,账号或密码错误')
           }
         } catch (error) {
           // 处理网络或服务器错误
-          console.error(error)
-          this.login_error = '登录失败，请稍后重试。'
+          ElMessage.error('登录失败,账号或密码错误')
         }
       }
     },

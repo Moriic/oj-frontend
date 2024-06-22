@@ -4,7 +4,7 @@
     <div class="layout_slider">
       <!-- 滚动组件 -->
       <el-scrollbar class="scrollbar">
-        <div class="logo">
+        <div class="logo" @click="goHome">
           <svg-icon name="logo" size="38px" color="#eff0ff" class="logoIcon" />
           <h1 class="logoTitle">Web课程教学辅助系统</h1>
         </div>
@@ -21,16 +21,70 @@
     </div>
     <!-- 内容展示区域 -->
     <div class="layout_main">
-      <RouterView />
+      <div class="layout_tabbar">
+        <div
+          style="display: flex; justify-content: end; margin: 20px 20px"
+          v-if="role === 'none'"
+        >
+          <el-button type="primary" @click="goLogin">登录</el-button>
+          <el-button type="success" @click="goRegister">注册</el-button>
+        </div>
+      </div>
+      <div class="main">
+        <RouterView />
+      </div>
+    </div>
+    <div
+      style="
+        position: absolute;
+        bottom: 0;
+        left: 260px;
+        right: 0;
+        background: #ffffff;
+        height: 50px;
+      "
+    >
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 50px;
+          font-family: Consolas;
+        "
+      >
+        <span style="margin-right: 10px">&copy; 2024 Web课程教学辅助系统</span>
+        {{ currentTime }}
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { constantRoute } from '@/router/routes'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import Menu from '@/layout/Menu.vue'
+import { onMounted, ref } from 'vue'
 const $route = useRoute()
+const router = useRouter()
+const goHome = () => {
+  router.push('/')
+}
+const currentTime = ref()
+const role = ref('none')
+onMounted(() => {
+  setInterval(() => {
+    currentTime.value = new Date().toLocaleString()
+  }, 1000)
+  let r = localStorage.getItem('role')
+  if (r != null) role.value = r as string
+})
+const goLogin = () => {
+  router.push('/login')
+}
+const goRegister = () => {
+  router.push('/register')
+}
 </script>
 
 <style scoped lang="scss">
@@ -65,35 +119,29 @@ const $route = useRoute()
     top: 0;
     left: $base-menu-width;
     transition: all 0.3s;
-
-    &.fold {
-      width: calc(100vw - $base-menu-min-width);
-      left: $base-menu-min-width;
-    }
   }
 
   .layout_main {
-    position: absolute;
-    width: calc(100% - $base-menu-width - 40px);
-    height: calc(100vh - $base-tabbar-height - 20px);
-    left: $base-menu-width;
-    top: $base-tabbar-height;
-    padding: 20px;
-    overflow: auto;
     transition: all 0.3s;
-    border-radius: 8px;
-    background: white;
-
-    box-shadow:
-      0 1px 2px -2px rgba(0, 0, 0, 0.08),
-      0 3px 6px 0 rgba(0, 0, 0, 0.06),
-      0 5px 12px 4px rgba(0, 0, 0, 0.04);
-    margin: 0 20px;
-    &.fold {
-      width: calc(100vw - $base-menu-min-width);
-      left: $base-menu-min-width;
-    }
+    display: flex;
+    flex-direction: column;
   }
+}
+.main {
+  margin: 0 20px;
+  position: absolute;
+  width: calc(100% - $base-menu-width - 40px);
+  height: calc(100vh - $base-tabbar-height - 80px);
+  left: $base-menu-width;
+  top: $base-tabbar-height;
+  overflow: auto;
+  border-radius: 8px;
+  background: white;
+  padding: 20px;
+  box-shadow:
+    0 1px 2px -2px rgba(0, 0, 0, 0.08),
+    0 3px 6px 0 rgba(0, 0, 0, 0.06),
+    0 5px 12px 4px rgba(0, 0, 0, 0.04);
 }
 .logo {
   display: flex;
@@ -101,6 +149,7 @@ const $route = useRoute()
   align-items: center;
   color: #646cff;
   margin: 20px 0 20px 0;
+  cursor: pointer;
 }
 
 .logoTitle {

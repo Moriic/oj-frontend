@@ -64,11 +64,11 @@ export default {
       console.log(response)
       if (response.status == 200) {
         if (response.data.data == 0) {
-          alert('无法注册')
+          ElMessage.error('无法注册')
           return
         }
       } else {
-        alert('系统错误')
+        ElMessage.error('系统错误')
         return
       }
 
@@ -112,12 +112,11 @@ export default {
               this.goToLogin()
             }, 1000) // 1000 毫秒 = 1 秒
           } else if (data.message == '注册账号已存在')
-            alert('账号已存在,请前往登录')
+            ElMessage.success('账号已存在,请前往登录')
         } else {
           this.error = '注册失败，请稍后再试'
         }
       } catch (error) {
-        console.error(error)
         this.error = '注册失败，请稍后再试'
       }
     },

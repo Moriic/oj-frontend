@@ -14,10 +14,10 @@ const service: AxiosInstance = axios.create({
 /* 请求拦截器 */
 service.interceptors.request.use(
   (config) => {
-    // const token = localGet(TOKEN_KEY)
-    // if (token) {
-    //   config.headers.Authorization = `${token}`
-    // }
+    const token = localStorage.getItem('token')
+    if (token) {
+      config.headers.authentication = `${token}`
+    }
     return config
   },
   (error: AxiosError) => {

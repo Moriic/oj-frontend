@@ -2,7 +2,7 @@
   <div class="exam-list">
     <el-tabs type="border-card" stretch v-model="activeName">
       <el-tab-pane label="待完成试卷" name="first" stretch>
-        <div style="min-height: 700px">
+        <div style="min-height: 68vh">
           <el-row :gutter="20">
             <el-col :span="8" v-for="exam in examList" :key="exam.id">
               <el-card shadow="hover">
@@ -56,7 +56,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="已完成试卷" name="second">
-        <div style="min-height: 700px">
+        <div style="min-height: 68vh">
           <el-row :gutter="20">
             <el-col :span="8" v-for="exam in finishList" :key="exam.id">
               <el-card shadow="hover">
