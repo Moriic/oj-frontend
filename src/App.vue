@@ -1,7 +1,13 @@
 <template>
-  <main>
-    <RouterView />
-  </main>
+  <div class="all">
+    <router-view></router-view>
+  </div>
 </template>
 
-<script lang="ts" setup></script>
+<script setup lang="ts"></script>
+
+<style scoped>
+.all {
+  background: #f6f9fb;
+}
+</style>

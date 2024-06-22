@@ -5,12 +5,10 @@
       <el-menu-item
         :index="item.path"
         v-if="!item.meta.hidden"
-        @click="goRoute"
+        @click="goRoute(item.path)"
       >
-        <!--        <el-icon>-->
-        <!--          <component :is="item.meta.icon"></component>-->
-        <!--        </el-icon>-->
         <template #title>
+          <svg-icon :name="item.meta.icon" size="19px" />
           <span>{{ item.meta.title }}</span>
         </template>
       </el-menu-item>
@@ -39,7 +37,7 @@
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
-        <span>{{ item.meta.title }}</span>
+        <div>{{ item.meta.title }}</div>
       </template>
       <Menu :menuList="item.children"></Menu>
     </el-sub-menu>
@@ -48,21 +46,30 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { onMounted } from 'vue'
 //获取父组件传递过来的全部路由数组
-let props = defineProps(['menuList'])
-
-onMounted(() => {
-  console.log(props)
-})
+defineProps(['menuList'])
 //获取路由器对象
 let $router = useRouter()
 //点击菜单的回调
-const goRoute = (vc: any) => {
+const goRoute = (path: any) => {
   //路由跳转
-  $router.push(vc.index)
+  $router.push(path)
 }
 </script>
 <script lang="ts"></script>
 
-<style scoped></style>
+<style scoped>
+.is-active {
+  background-color: #eff0ff;
+}
+.el-menu-item {
+  border-radius: 8px;
+  height: 50px;
+  margin: 10px 0;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 1px;
+}
+</style>

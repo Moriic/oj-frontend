@@ -4,8 +4,8 @@ import '@/styles/index.scss'
 import 'virtual:svg-icons-register'
 import registerGlobComp from '@/components'
 import pinia from '@/store'
-// import ElementPlus from 'element-plus'
-// import 'element-plus/dist/index.css'
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 import router from './router'
 import axios from 'axios'
 
@@ -36,7 +36,7 @@ axios.interceptors.request.use(
 app.config.globalProperties.$axios = axios
 
 app.use(registerGlobComp)
-// app.use(ElementPlus)
+app.use(ElementPlus)
 app.use(pinia)
 app.use(router)
 
