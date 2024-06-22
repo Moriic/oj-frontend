@@ -109,7 +109,7 @@ const handleClick = async (action: string, row: any) => {
       path: '/studentExercise',
       query: {
         id: row.id,
-        name:row.name,
+        name: row.name,
       },
     })
   }

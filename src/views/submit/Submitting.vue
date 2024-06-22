@@ -1,6 +1,6 @@
 <template>
-  <div class="exercise-title">{{ input }}</div>  
-  <hr>
+  <div class="exercise-title">{{ input }}</div>
+  <hr />
   <div class="subtitle">实验内容</div>
   <!-- 问题内容区 -->
   <div class="text-wrapper">
@@ -50,8 +50,8 @@ export default {
     const editorRef = shallowRef(null)
     const input = ref('')
     const exerciseId = ref(0) //题目id
-    const textHtml = ref('')  //题目内容
-    const valueHtml = ref('')  //回答内容
+    const textHtml = ref('') //题目内容
+    const valueHtml = ref('') //回答内容
     const router = useRouter()
 
     // 使用 onMounted 钩子确保在页面加载时处理路由参数
@@ -93,7 +93,7 @@ export default {
         uploadVideo: {
           server: 'http://localhost:8100/exercise/uploadVideo',
           fieldName: 'file',
-          maxFileSize:1024 * 1024 * 1024,
+          maxFileSize: 1024 * 1024 * 1024,
           customInsert(res, insertFn) {
             const url = res.data
             insertFn(url)
@@ -101,8 +101,6 @@ export default {
         },
       },
     }
-    
-
 
     // 编辑器销毁时执行
     onBeforeUnmount(() => {
@@ -141,7 +139,7 @@ export default {
         router.push({
           path: '/submit',
           query: {
-            activeTab: 'submitted'
+            activeTab: 'submitted',
           },
         })
       } catch (error) {
@@ -173,7 +171,7 @@ export default {
 </script>
 
 <style scoped>
-.exercise-title{
+.exercise-title {
   font-size: x-large;
   font-weight: bold;
   padding: 10px;
