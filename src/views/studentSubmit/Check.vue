@@ -46,6 +46,7 @@ export default {
     const textHtml = ref('') //题目内容
     const valueHtml = ref('') //回答内容
     const router = useRouter()
+    let stuId = 0;
 
     // 使用 onMounted 钩子确保在页面加载时处理路由参数
     onMounted(async () => {
@@ -57,11 +58,22 @@ export default {
         if (
           router.currentRoute.value.query.id &&
           router.currentRoute.value.query.name &&
-          router.currentRoute.value.query.content
+          router.currentRoute.value.query.content &&
+          router.currentRoute.value.query.stuId
         ) {
           exerciseId.value = router.currentRoute.value.query.id
           input.value = router.currentRoute.value.query.name
           textHtml.value = router.currentRoute.value.query.content
+          stuId = router.currentRoute.value.query.stuId
+
+          // 获取学生提交的内容
+          const response = await http.get(
+            '/exercise_finish/submit_content?exerciseId=' + exerciseId.value+"&studentId="+stuId
+          )
+          valueHtml.value = response
+        } else {
+          // 如果没有 id、name 和 content 参数，则跳转到上一页
+          router.go(-1)
 
           //获取提交的内容
           const response = await http.get(

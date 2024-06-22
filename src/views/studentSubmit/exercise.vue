@@ -97,6 +97,7 @@ const handleClick = async (action: string, row: any) => {
     router.push({
       path: '/checkStudent',
       query: {
+        stuId: stuid,
         id: row.id,
         name: row.name,
         content: row.content,
@@ -164,8 +165,8 @@ const fetchData = async () => {
 
 onMounted(() => {
   if (router.currentRoute.value.query.id) {
-    ;(stuid = router.currentRoute.value.query.id),
-      (stuName.value = router.currentRoute.value.query.name)
+    stuid = router.currentRoute.value.query.id
+    stuName.value = router.currentRoute.value.query.name
   }
   fetchData()
 })
