@@ -135,6 +135,10 @@ function formatTimestamp(timestamp) {
 }
 
 onMounted(() => {
+  if(localStorage.getItem('role')=='student'){
+    document.getElementById('edit-button').style.display = 'none'
+  }
+
   if (localStorage.getItem('announce') == null) {
     localStorage.setItem(
       'announce',
@@ -168,6 +172,19 @@ onBeforeUnmount(() => {
   }
 })
 
+function formatMenu(menu) {
+  if (menu == 'exam') {
+    return '自测题库';
+  }
+  if (menu == 'exercise') {
+    if(localStorage.getItem('role')=='student'){
+      return '实验提交';
+    }else{
+      return '实验发布';
+    }
+  }
+}
+
 const handleSearch = async () => {
   if (searchText.value !== '') {
     const response = await http.get(
@@ -181,8 +198,12 @@ const handleSearch = async () => {
 }
 
 const handleClick = (item) => {
+
   if (item.menu === '实验提交') {
     router.push('/submit')
+  }
+  if (item.menu === '实验发布') {
+    router.push('/exercise')
   }
   if (item.menu === '自测题库') {
     router.push('/questionBank')
