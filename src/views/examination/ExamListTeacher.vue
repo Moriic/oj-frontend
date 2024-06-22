@@ -40,6 +40,9 @@
                 <el-button type="primary" @click="updateExam(exam.id)">
                   修改试题
                 </el-button>
+                <el-button type="warning" @click="finishDetail(exam.id)">
+                  答题情况
+                </el-button>
                 <el-popconfirm
                   title="确认删除?"
                   confirm-button-text="确认"
@@ -77,6 +80,10 @@ import CreateExamination from '@/views/examination/CreateExamination.vue'
 
 const examList = ref([])
 const router = useRouter()
+
+const finishDetail = (id) => {
+  router.push({ path: '/finishDetail', query: { id } })
+}
 
 const puslishExam = async (index) => {
   await http.post(`/examination/publish/${examList.value[index].id}`)

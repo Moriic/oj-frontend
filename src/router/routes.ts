@@ -173,6 +173,16 @@ export const constantRoute: Array<RouteRecordRaw> = [
           icon: 'managerIcon',
         },
       },
+      {
+        //老师个人信息+学生管理T
+        path: '/finishDetail',
+        component: () => import('@/views/examination/ExamFinishDetail.vue'),
+        meta: {
+          hidden: true,
+          role: 'teacher',
+          icon: 'managerIcon',
+        },
+      },
     ],
   },
   {

@@ -5,6 +5,7 @@ import type {
   AxiosRequestConfig,
   AxiosResponse,
 } from 'axios'
+import router from '@/router'
 
 const service: AxiosInstance = axios.create({
   baseURL: 'http://localhost:8100',
@@ -50,6 +51,7 @@ service.interceptors.response.use(
       case 401:
         message = 'token 失效，请重新登录'
         // 这里可以触发退出的 action
+        router.push('/login')
         break
       case 403:
         message = '拒绝访问'
