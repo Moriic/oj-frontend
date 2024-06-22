@@ -107,5 +107,6 @@ const $route = useRoute()
   font-size: 18px;
   font-family: Consolas;
   margin-left: 10px;
+  font-weight: bold;
 }
 </style>

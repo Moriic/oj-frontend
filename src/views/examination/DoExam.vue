@@ -235,6 +235,7 @@ const submitExam = async () => {
     result.value = await http.get(`/exam_finish/${finishId}`)
     isFinish.value = true
     trueCount.value = result.value.result.filter(Boolean).length
+    isSubmit = true
   } catch (error) {
     console.error('提交试卷失败:', error)
   }
@@ -264,7 +265,6 @@ onBeforeMount(async () => {
     const response = await http.get(`/examination/${examId}`)
     exam.value = response
     timeLimit.value = exam.value.timeLimit
-    isSubmit = true
   } catch (error) {
     console.error('获取试卷数据失败:', error)
   }
