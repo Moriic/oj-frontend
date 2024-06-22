@@ -22,7 +22,7 @@
       stripe
       border
       :data="filteredQuestionBanks"
-      max-height="720"
+      max-height="70vh"
       style="width: 100%"
       @selection-change="handleSelectionChange"
     >
@@ -260,7 +260,8 @@ const filterType = (value, row) => {
 
 onMounted(() => {
   getQuestionList()
-  // TODO  根据role修改type
+  let role = localStorage.getItem('role')
+  if (role === 'student') examForm.type = 0
 })
 
 // 搜索关键词

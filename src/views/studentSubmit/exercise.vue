@@ -16,7 +16,7 @@
           ></el-input>
           <el-table
             :data="filteredDataNoSubmitted"
-            max-height="500"
+            max-height="400"
             stripe
             border
             class="table"

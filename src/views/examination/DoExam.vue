@@ -1,7 +1,7 @@
 <template>
   <div class="exam">
     <div class="card">
-      <el-card style="width: 90%">
+      <el-card style="width: 100%" shadow="none">
         <template #header>
           <div style="position: relative">
             <div style="text-align: center; font-size: 20px">
@@ -15,7 +15,7 @@
             </div>
           </div>
         </template>
-        <div v-if="currentQuestionIndex !== null" style="min-height: 600px">
+        <div v-if="currentQuestionIndex !== null" style="min-height: 530px">
           <div
             style="
               display: flex;
@@ -189,7 +189,7 @@ const trueCount = ref()
 const router = useRouter()
 
 const goToExam = () => {
-  router.push('/exam')
+  router.push({ path: '/exam', query: { tab: 'second' } })
 }
 const currentQuestion = computed(() => {
   return exam.value.questions
@@ -330,6 +330,5 @@ p {
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
 }
 </style>

@@ -3,67 +3,11 @@ import { RouteRecordRaw } from 'vue-router'
 
 export const constantRoute: Array<RouteRecordRaw> = [
   {
-    //登录
-    path: '/login',
-    component: () => import('@/views/Login.vue'),
-    name: 'login',
-    meta: {
-      title: '登录', //菜单标题
-      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
-    },
-  },
-  {
-    //忘记密码
-    path: '/forgetPassword',
-    component: () => import('@/views/ForgetPassword.vue'),
-    name: 'forgetPassword',
-    meta: {
-      title: '重设密码', //菜单标题
-      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
-    },
-  },
-  {
-    //注册账号
-    path: '/register',
-    component: () => import('@/views/Register.vue'),
-    name: 'register',
-    meta: {
-      title: '注册账号', //菜单标题
-      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
-    },
-  },
-  {
-    //学生个人信息
-    path: '/studentProfile',
-    component: () => import('@/views/StudentProfile.vue'),
-    name: 'studentProfile',
-    meta: {
-      title: '学生信息', //菜单标题
-      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
-    },
-  },
-  {
-    //老师个人信息+学生管理T
-    path: '/teacherDashboard',
-    component: () => import('@/views/TeacherDashboard.vue'),
-    name: 'teacherDashboard',
-    meta: {
-      title: '教师管理页面', //菜单标题
-      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
-    },
-  },
-  {
     //登录成功以后展示数据的路由
     path: '/',
-    redirect: '/exercise',
+    redirect: '/home',
     component: () => import('@/layout/index.vue'),
     name: 'layout',
-    meta: {
-      title: '',
-      hidden: false,
-      icon: '',
-    },
-    redirect: '/home',
     children: [
       {
         path: '/home',
@@ -72,6 +16,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
           title: '首页',
           hidden: false,
           icon: 'homeIcon',
+          role: 'none',
         },
       },
       {
@@ -81,6 +26,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
           title: '实验发布',
           hidden: false,
           icon: 'exerciseIcon',
+          role: 'teacher',
         },
       },
       {
@@ -90,6 +36,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
           title: '实验提交',
           hidden: false,
           icon: 'exerciseSubIcon',
+          role: 'student',
         },
       },
       {
@@ -98,6 +45,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
         meta: {
           title: '提交实验',
           hidden: true,
+          role: 'student',
         },
       },
       {
@@ -106,6 +54,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
         meta: {
           title: '查看已提交实验',
           hidden: true,
+          role: 'teacher',
         },
       },
       {
@@ -115,24 +64,27 @@ export const constantRoute: Array<RouteRecordRaw> = [
           title: '自测题库',
           hidden: false,
           icon: 'questionIcon',
+          role: 'question',
         },
       },
       {
         path: '/exam',
         component: () => import('@/views/examination/ExamList.vue'),
         meta: {
-          title: '查看试卷,学生',
+          title: '查看试卷',
           hidden: false,
           icon: 'examIcon',
+          role: 'student',
         },
       },
       {
         path: '/exam/teacher',
         component: () => import('@/views/examination/ExamListTeacher.vue'),
         meta: {
-          title: '查看试卷,老师',
+          title: '查看试卷',
           hidden: false,
           icon: 'examIcon',
+          role: 'teacher',
         },
       },
       {
@@ -169,6 +121,7 @@ export const constantRoute: Array<RouteRecordRaw> = [
           title: '学生提交',
           hidden: false,
           icon: 'submitIcon',
+          role: 'teacher',
         },
       },
       {
@@ -196,7 +149,61 @@ export const constantRoute: Array<RouteRecordRaw> = [
           hidden: true,
         },
       },
+      {
+        //学生个人信息
+        path: '/studentProfile',
+        component: () => import('@/views/StudentProfile.vue'),
+        name: 'studentProfile',
+        meta: {
+          title: '学生信息', //菜单标题
+          hidden: false, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
+          role: 'student',
+          icon: 'managerIcon',
+        },
+      },
+      {
+        //老师个人信息+学生管理T
+        path: '/teacherDashboard',
+        component: () => import('@/views/TeacherDashboard.vue'),
+        name: 'teacherDashboard',
+        meta: {
+          title: '教师管理页面', //菜单标题
+          hidden: false, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
+          role: 'teacher',
+          icon: 'managerIcon',
+        },
+      },
     ],
+  },
+  {
+    //登录
+    path: '/login',
+    component: () => import('@/views/Login.vue'),
+    name: 'login',
+    meta: {
+      title: '登录', //菜单标题
+      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
+    },
+  },
+  {
+    //忘记密码
+    path: '/forgetPassword',
+    component: () => import('@/views/ForgetPassword.vue'),
+    name: 'forgetPassword',
+    meta: {
+      title: '重设密码', //菜单标题
+      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
+    },
+  },
+  {
+    //注册账号
+    path: '/register',
+    component: () => import('@/views/Register.vue'),
+    name: 'register',
+    meta: {
+      title: '注册账号', //菜单标题
+      hidden: true, //代表路由标题在菜单中是否隐藏  true:隐藏 false:不隐藏
+    },
   },
 ]
 

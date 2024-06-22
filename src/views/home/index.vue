@@ -1,6 +1,39 @@
-<!-- src/views/Home.vue -->
 <template>
   <div class="home">
+    <div style="display: flex; align-items: center">
+      <el-popover placement="right" :width="700" trigger="hover">
+        <template #reference>
+          <el-input
+            v-model="searchText"
+            placeholder="请输入搜索内容"
+            class="search-input"
+            clearable
+            @clear="handleSearchClear"
+            @input="handleSearch"
+          ></el-input>
+        </template>
+        <div
+          class="hoverable-div"
+          v-for="item in searchRes"
+          :key="item"
+          style="
+            width: 100%;
+            height: 35px;
+            border: 1px;
+            border-radius: 5px;
+            padding: 5px;
+          "
+          @click="handleClick(item)"
+        >
+          <span style="font-weight: bold; font-size: large">
+            {{ item.menu }}
+          </span>
+          <span style="font-weight: bold">> {{ item.title }}</span>
+          <span style="color: gray">> {{ item.content }}</span>
+        </div>
+      </el-popover>
+    </div>
+
     <div
       style="padding: 10px; font-weight: bold; font-size: 24px; color: #646cff"
     >
@@ -37,11 +70,6 @@
         </el-collapse-item>
       </el-collapse>
     </div>
-    <el-footer>
-      &copy; 2024 Web课程教学辅助系统
-      <br />
-      {{ currentTime }}
-    </el-footer>
   </div>
 </template>
 
@@ -56,6 +84,8 @@ const mode = ref('default')
 const currentTime = ref(new Date().toLocaleString())
 const exercises = ref([])
 const router = useRouter()
+const searchRes = ref([])
+const searchText = ref('')
 let timer
 
 function formatTimestamp(timestamp: number[]): string {
@@ -69,17 +99,23 @@ function formatTimestamp(timestamp: number[]): string {
   )}:${String(second).padStart(2, '0')}`
 }
 
+function formatMenu(menu: string): string {
+  if (menu == 'exam') {
+    return '自测题库'
+  }
+  if (menu == 'exercise') {
+    return '实验提交'
+  }
+  return menu
+}
+
 onMounted(() => {
-  timer = setInterval(() => {
-    currentTime.value = new Date().toLocaleString()
-  }, 1000)
   ;(async () => {
     const response = await http.get('/exercise/list_published')
     exercises.value = response.map((item: any) => ({
       ...item,
       timestamp: formatTimestamp(item.timestamp),
     }))
-    console.log(response)
   })()
 })
 const handleCreated = (editor) => {
@@ -92,28 +128,64 @@ onBeforeUnmount(() => {
     editor.destroy()
   }
 })
+
+const handleSearch = async () => {
+  if (searchText.value != '') {
+    const response = await http.get(
+      '/exercise/search?searchStr=' + searchText.value,
+    )
+    searchRes.value = response.map((item: any) => ({
+      ...item,
+      menu: formatMenu(item.menu),
+    }))
+  }
+}
+
+const handleClick = (item: any) => {
+  if (item.menu == '实验提交') {
+    router.push('/submit')
+  }
+  if (item.menu == '自测题库') {
+    router.push('/questionBank')
+  }
+}
+const handleSearchClear = () => {
+  searchText.value = ''
+}
 </script>
 
 <style scoped>
 .home {
-  min-height: 80vh;
+  min-height: 75vh;
   display: flex;
   flex-direction: column;
 }
+
 .demo-collapse {
   margin: 0 auto;
   width: 96%;
 }
+
 .text-wrapper {
   margin: 10px;
   width: 60%;
   box-sizing: border-box;
 }
+
 .el-footer {
   text-align: center;
   background-color: #646cff;
   color: #fff;
   height: 50px;
   margin-top: auto;
+}
+
+.el-input {
+  padding: 10px;
+  width: 300px;
+}
+.hoverable-div:hover {
+  background-color: #dddefb;
+  cursor: pointer;
 }
 </style>
