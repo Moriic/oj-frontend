@@ -109,7 +109,7 @@ const handleClick = async (action: string, row: any) => {
       path: '/studentExercise',
       query: {
         id: row.id,
-        name:row.name,
+        name: row.name,
       },
     })
   }
@@ -151,7 +151,7 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.exercise-title{
+.exercise-title {
   font-size: x-large;
   font-weight: bold;
   padding: 10px;

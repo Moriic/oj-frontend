@@ -1,6 +1,6 @@
 <template>
-  <div class="exercise-title">{{ input }}</div>  
-  <hr>
+  <div class="exercise-title">{{ input }}</div>
+  <hr />
   <div class="subtitle">实验内容</div>
   <!-- 问题内容区 -->
   <div class="text-wrapper">
@@ -43,8 +43,8 @@ export default {
     const editorRef = shallowRef(null)
     const input = ref('')
     const exerciseId = ref(0) //题目id
-    const textHtml = ref('')  //题目内容
-    const valueHtml = ref('')  //回答内容
+    const textHtml = ref('') //题目内容
+    const valueHtml = ref('') //回答内容
     const router = useRouter()
 
     // 使用 onMounted 钩子确保在页面加载时处理路由参数
@@ -62,9 +62,11 @@ export default {
           exerciseId.value = router.currentRoute.value.query.id
           input.value = router.currentRoute.value.query.name
           textHtml.value = router.currentRoute.value.query.content
-          
+
           //获取提交的内容
-          const response = await http.get('/exercise_finish/submit_content?exerciseId=' + exerciseId.value)
+          const response = await http.get(
+            '/exercise_finish/submit_content?exerciseId=' + exerciseId.value,
+          )
           valueHtml.value = response
         }
       } catch (error) {
@@ -75,7 +77,6 @@ export default {
     // Editor 相关配置
     const editorConfig = {}
     editorConfig.readOnly = true
-
 
     // 编辑器销毁时执行
     onBeforeUnmount(() => {
@@ -92,7 +93,7 @@ export default {
 
     // 返回按钮点击处理
     const handleCancel = () => {
-      router.go(-1);
+      router.go(-1)
     }
 
     return {
@@ -110,7 +111,7 @@ export default {
 </script>
 
 <style scoped>
-.exercise-title{
+.exercise-title {
   font-size: x-large;
   font-weight: bold;
   padding: 10px;

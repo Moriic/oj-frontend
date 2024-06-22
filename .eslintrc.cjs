@@ -23,7 +23,7 @@ module.exports = {
     'plugin:vue/vue3-essential',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
-    './.eslintrc-auto-import.json'
+    './.eslintrc-auto-import.json',
   ],
   plugins: ['vue', '@typescript-eslint'],
   /*
@@ -41,7 +41,7 @@ module.exports = {
     'no-useless-escape': 'off', // 禁止不必要的转义字符
 
     // typeScript (https://typescript-eslint.io/rules)
-    '@typescript-eslint/no-unused-vars': 'error', // 禁止定义未使用的变量
+    '@typescript-eslint/no-unused-vars': 'off', // 禁止定义未使用的变量
     '@typescript-eslint/prefer-ts-expect-error': 'error', // 禁止使用 @ts-ignore
     '@typescript-eslint/no-explicit-any': 'off', // 禁止使用 any 类型
     '@typescript-eslint/no-non-null-assertion': 'off',
@@ -53,5 +53,6 @@ module.exports = {
     'vue/script-setup-uses-vars': 'error', // 防止<script setup>使用的变量<template>被标记为未使用
     'vue/no-mutating-props': 'off', // 不允许组件 prop的改变
     'vue/attribute-hyphenation': 'off', // 对模板中的自定义组件强制执行属性命名样式
+    'vue/no-unused-components': 'off',
   },
 }

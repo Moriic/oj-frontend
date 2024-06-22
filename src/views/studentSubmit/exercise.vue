@@ -1,6 +1,6 @@
 <template>
-  <div class="exercise-title">{{ stuName }}的实验提交情况</div>  
-  <hr>
+  <div class="exercise-title">{{ stuName }}的实验提交情况</div>
+  <hr />
   <el-container class="common-layout">
     <el-main>
       <el-row :gutter="20">
@@ -64,8 +64,8 @@
     </el-main>
   </el-container>
   <div class="button-container">
-      <button class="cancel-button" @click="handleCancel">返回</button>
-    </div>
+    <button class="cancel-button" @click="handleCancel">返回</button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -135,10 +135,10 @@ const filteredDataSubmitted = computed(() => {
 
 // 返回按钮点击处理
 const handleCancel = () => {
-      router.push({
-          path: '/studentSubmit',
-        })
-    }
+  router.push({
+    path: '/studentSubmit',
+  })
+}
 
 const fetchData = async () => {
   try {
@@ -164,15 +164,15 @@ const fetchData = async () => {
 
 onMounted(() => {
   if (router.currentRoute.value.query.id) {
-    stuid = router.currentRoute.value.query.id,
-    stuName.value = router.currentRoute.value.query.name
+    ;(stuid = router.currentRoute.value.query.id),
+      (stuName.value = router.currentRoute.value.query.name)
   }
   fetchData()
 })
 </script>
 
 <style scoped>
-.exercise-title{
+.exercise-title {
   margin: 10px;
   font-size: x-large;
   font-weight: bold;
