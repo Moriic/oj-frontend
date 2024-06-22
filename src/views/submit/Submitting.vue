@@ -90,6 +90,15 @@ export default {
             insertFn(url)
           },
         },
+        uploadVideo: {
+          server: 'http://localhost:8100/exercise/uploadVideo',
+          fieldName: 'file',
+          maxFileSize:1024 * 1024 * 1024,
+          customInsert(res, insertFn) {
+            const url = res.data
+            insertFn(url)
+          },
+        },
       },
     }
     
